@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class VendorCoApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(VendorCoApplication.class, args);
 	}
 
