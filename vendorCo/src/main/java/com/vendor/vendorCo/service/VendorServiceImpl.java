@@ -1,0 +1,35 @@
+package com.vendor.vendorCo.service;
+
+import com.vendor.vendorCo.model.Vendor;
+import com.vendor.vendorCo.repository.VendorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class VendorServiceImpl extends VendorService {
+
+    @Autowired
+    private VendorRepository vendorRepository;
+
+    @Override
+    public List<Vendor> getAllVendors() {
+        return vendorRepository.findAll();
+    }
+
+    @Override
+    public Vendor getVendorById(String id) {
+        return vendorRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Vendor saveVendor(Vendor vendor) {
+        return vendorRepository.save(vendor);
+    }
+
+    @Override
+    public void deleteVendor(String id) {
+        vendorRepository.deleteById(id);
+    }
+}
