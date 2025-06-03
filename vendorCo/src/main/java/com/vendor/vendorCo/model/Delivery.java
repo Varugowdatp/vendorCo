@@ -1,18 +1,20 @@
 package com.vendor.vendorCo.model;
 
-
+import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "deliveries")
+//import org.springframework.data.mongodb.core.mapping.Document;
+@Entity
+@Table(name = "Delivery")
+//@Document(collection = "deliveries")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+//@Builder
 public class Delivery {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String vendorId;
     private String orderId;
     private String scheduledDate;

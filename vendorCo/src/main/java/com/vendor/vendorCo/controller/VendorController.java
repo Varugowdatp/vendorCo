@@ -23,4 +23,12 @@ public class VendorController {
     public List<Vendor> getAll() {
         return vendorService.getAllVendors();
     }
+    @GetMapping("/{id}")
+    public Vendor getVendorById(Long id){
+        return vendorService.getVendorById(id);
+    }
+  @DeleteMapping("/{id}")
+    public  void deleteVendor(Long id){
+        vendorService.deleteVendor(id);
+  }
 }

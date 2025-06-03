@@ -25,18 +25,18 @@ public class DeliveryController {
     }
 
     @GetMapping("/{id}")
-    public Delivery getDeliveryById(@PathVariable String id) {
+    public Delivery getDeliveryById(@PathVariable Long id) {
         return deliveryRepo.findById(id).orElse(null);
     }
 
     @PutMapping("/{id}")
-    public Delivery updateDelivery(@PathVariable String id, @RequestBody Delivery updatedDelivery) {
+    public Delivery updateDelivery(@PathVariable Long id, @RequestBody Delivery updatedDelivery) {
         updatedDelivery.setId(id);
         return deliveryRepo.save(updatedDelivery);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteDelivery(@PathVariable String id) {
+    public void deleteDelivery(@PathVariable Long id) {
         deliveryRepo.deleteById(id);
     }
 }

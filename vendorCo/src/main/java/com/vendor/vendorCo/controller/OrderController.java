@@ -25,18 +25,18 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public Order getOrderById(@PathVariable String id) {
+    public Order getOrderById(@PathVariable Long id) {
         return orderRepo.findById(id).orElse(null);
     }
 
     @PutMapping("/{id}")
-    public Order updateOrder(@PathVariable String id, @RequestBody Order updatedOrder) {
+    public Order updateOrder(@PathVariable Long id, @RequestBody Order updatedOrder) {
         updatedOrder.setId(id);
         return orderRepo.save(updatedOrder);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteOrder(@PathVariable String id) {
+    public void deleteOrder(@PathVariable Long id) {
         orderRepo.deleteById(id);
     }
 }

@@ -19,7 +19,7 @@ public class VendorServiceImpl extends VendorService {
     }
 
     @Override
-    public Vendor getVendorById(String id) {
+    public Vendor getVendorById(Long id) {
         return vendorRepository.findById(id).orElse(null);
     }
 
@@ -29,7 +29,7 @@ public class VendorServiceImpl extends VendorService {
     }
 
     @Override
-    public void deleteVendor(String id) {
+    public void deleteVendor(Long id) {
         vendorRepository.deleteById(id);
     }
 }

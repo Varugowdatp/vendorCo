@@ -2,11 +2,13 @@ package com.vendor.vendorCo.model;
 
 
 
+import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+//import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "vendors")
+//@Document(collection = "vendors")
+@Entity
+@Table(name = "Vendors")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,8 +16,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 //@Entity
 public class Vendor {
     @Id
-
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String contactPerson;
     private String contactEmail;
