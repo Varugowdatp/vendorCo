@@ -2,8 +2,11 @@ package com.vendor.vendorCo.controller;
 
 import com.vendor.vendorCo.model.Order;
 import com.vendor.vendorCo.repository.OrderRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -15,7 +18,8 @@ public class OrderController {
     private OrderRepository orderRepo;
 
     @PostMapping
-    public Order createOrder(@RequestBody Order order) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Order createOrder(@Valid @RequestBody Order order) {
         return orderRepo.save(order);
     }
 
@@ -26,17 +30,24 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public Order getOrderById(@PathVariable Long id) {
-        return orderRepo.findById(id).orElse(null);
+        return orderRepo.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found with id: " + id));
     }
 
     @PutMapping("/{id}")
-    public Order updateOrder(@PathVariable Long id, @RequestBody Order updatedOrder) {
-        updatedOrder.setId(id);
+    public Order updateOrder(@PathVariable Long id, @Valid @RequestBody Order updatedOrder) {
+        Order existingOrder = orderRepo.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found with id: " + id));
+        updatedOrder.setId(existingOrder.getId());
         return orderRepo.save(updatedOrder);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteOrder(@PathVariable Long id) {
+        if (!orderRepo.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found with id: " + id);
+        }
         orderRepo.deleteById(id);
     }
 }

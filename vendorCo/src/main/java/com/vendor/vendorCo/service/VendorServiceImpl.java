@@ -14,6 +14,11 @@ public class VendorServiceImpl extends VendorService {
     private VendorRepository vendorRepository;
 
     @Override
+    public Vendor addVendor(Vendor vendor) {
+        return vendorRepository.save(vendor);
+    }
+
+    @Override
     public List<Vendor> getAllVendors() {
         return vendorRepository.findAll();
     }
@@ -30,6 +35,9 @@ public class VendorServiceImpl extends VendorService {
 
     @Override
     public void deleteVendor(Long id) {
+        if (!vendorRepository.existsById(id)) {
+            throw new IllegalArgumentException("Vendor not found with id: " + id);
+        }
         vendorRepository.deleteById(id);
     }
 }

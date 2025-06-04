@@ -1,22 +1,28 @@
 package com.vendor.vendorCo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
-//import org.springframework.data.mongodb.core.mapping.Document;
 @Entity
 @Table(name = "Delivery")
-//@Document(collection = "deliveries")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@Builder
 public class Delivery {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "Vendor ID is required")
     private String vendorId;
+
+    @NotBlank(message = "Order ID is required")
     private String orderId;
+
+    @NotBlank(message = "Scheduled date is required")
     private String scheduledDate;
+
     private boolean isDelivered;
 }
