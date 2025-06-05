@@ -13,6 +13,10 @@ public class VendorServiceImpl extends VendorService {
     @Autowired
     private VendorRepository vendorRepository;
 
+    public VendorServiceImpl(VendorRepository vendorRepository) {
+        this.vendorRepository = vendorRepository;
+    }
+
     @Override
     public Vendor addVendor(Vendor vendor) {
         return vendorRepository.save(vendor);
