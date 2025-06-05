@@ -5,6 +5,8 @@ import com.vendor.vendorCo.repository.VendorRepository;
 import com.vendor.vendorCo.service.VendorServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,10 +14,12 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@SpringBootTest
 public class VendorServiceTest {
 
     private final VendorRepository vendorRepository = mock(VendorRepository.class);
     private final VendorServiceImpl vendorService = new VendorServiceImpl(vendorRepository);
+    MockMvc mockMvc;
 
     @Test
     void testGetVendorById() {
